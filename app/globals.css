@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0f14; /* restrained dark navy */
+  --foreground: #e8eef6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b0f14;
+    --foreground: #e8eef6;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Light surfaces used for cards on dark background */
+.bg-white {
+  background-color: #121820 !important;
+}
+.text-zinc-600 {
+  color: #9aa8b8 !important;
+}
+.text-zinc-700 {
+  color: #c9d3df !important;
+}
+.border-zinc-200 {
+  border-color: #2a3544 !important;
+}
+.bg-zinc-50 {
+  background-color: #0b0f14 !important;
+}
+.dark\\:bg-zinc-900\\/50 {
+  background-color: rgba(18, 24, 32, 0.75) !important;
+}
