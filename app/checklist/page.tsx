@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
 import { Container } from "@/components/Container";
+import { PrintButton } from "@/components/PrintButton";
 
 export const metadata = {
   title: "Audit Readiness Checklist",
@@ -40,12 +41,7 @@ export default function ChecklistPage() {
           <Link href="/" className="text-sm text-zinc-600 hover:underline">
             ← Offer
           </Link>
-          <button
-            onClick={() => window.print()}
-            className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700"
-          >
-            Print
-          </button>
+          <PrintButton className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700" />
         </header>
         <div className="mb-4 inline-flex rounded-full border border-amber-400/40 bg-amber-50/60 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-700 print:hidden">
           Free · Printable · Not an audit
