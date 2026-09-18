@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Fortis Ready — marketing site
+================================
 
-## Getting Started
+Production-quality site built with Next.js (App Router) + TypeScript + Tailwind CSS. Designed for deployment on Vercel and the `fortisready.com` domain.
 
-First, run the development server:
+Tech
+- Next.js App Router, TypeScript
+- Tailwind (v4, via `@tailwindcss/postcss`)
+- `next/font` (Geist)
+- Accessible, fast, SEO-ready (metadata, robots, sitemap)
 
+Environment
+- Optional: `NEXT_PUBLIC_SITE_URL` for canonical/OG URLs (defaults to `https://fortisready.com`)
+- Example: see `.env.example`
+
+Local Development
+1. Install deps and start dev server:
+   ```bash
+   npm install
+   npm run dev
+   ```
+2. Visit `http://localhost:3000`
+
+Build
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build && npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Deploy to Vercel
+----------------
+1. Push this repository to GitHub
+2. In Vercel:
+   - New Project → Import this repo
+   - Framework: Next.js (auto-detected)
+   - Environment variables:
+     - `NEXT_PUBLIC_SITE_URL` → `https://fortisready.com` (or staging domain)
+   - Deploy
+3. After first deploy, add domains:
+   - Primary: `fortisready.com`
+   - Optional: `fortisready.dev` (or `getfortisready.com`)
+   - Add A/ALIAS (apex) and CNAME (www) records as instructed by Vercel
+4. Set `fortisready.com` as the Production domain
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+SEO & Assets
+- Favicon: `public/favicon.svg`
+- Apple touch icon: `public/apple-touch-icon.png`
+- OG/Twitter image: `public/og.png` (1200×630 recommended; replace when you have final artwork)
+- Sitemap: `/sitemap.xml` (auto)
+- Robots: `/robots.txt` (auto)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Pages & Components
+- `/` home: Hero, Problem, WhoFor, Offer/Pricing, Process, FAQ, Intake
+- `/checklist` printable Audit Readiness Checklist
 
-## Learn More
+Brand truth
+- Name: Fortis Ready
+- Tagline: “Get audit-ready before you pay for the audit.”
+- SKU‑1: Focused Contract Readiness Review — $299 / 300 USDC on Base, 48–72h, ≤ ~300 nSLOC / 1 contract
+- Not a formal audit; no guarantees; zero custody
+- Intake: `info@isuru.dev`
+- Pay (post-scope): `0x2415e94be90b4785f4b79f49db067c89925cc1ca` on Base
 
-To learn more about Next.js, take a look at the following resources:
+Notes
+- Avoid “crypto neon” visuals; use an institutional B2B tone.
+- Checklist page has print styles; use the Print button or `Ctrl/Cmd + P`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
