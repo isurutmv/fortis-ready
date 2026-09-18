@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Audit Readiness Checklist — Fortis Ready</title>
+  <meta name="description" content="Free printable Audit Readiness Checklist for EVM/Solidity teams: access control, proxies, oracles, reentrancy, tests, docs, and footguns." />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --surface: #121820;
+      --border: #2a3544;
+      --text: #e8eef6;
+      --muted: #9aa8b8;
+      --accent: #3d8bfd;
+      --warn: #e8b84a;
+      --ok: #3ecf8e;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 800px; margin: 0 auto; padding: 0 1.25rem; }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    .logo { font-weight: 700; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none !important;
+    }
+    .hero { padding: 2.5rem 0 1.5rem; }
+    h1 { font-size: 1.75rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .lead { color: var(--muted); margin-bottom: 1rem; }
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--warn);
+      border: 1px solid rgba(232, 184, 74, 0.35);
+      background: rgba(232, 184, 74, 0.08);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.35rem;
+      margin-bottom: 1rem;
+      break-inside: avoid;
+    }
+    .section h2 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .item {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      margin-bottom: 0.55rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .box {
+      flex-shrink: 0;
+      width: 1.1rem; height: 1.1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      margin-top: 0.2rem;
+      background: var(--bg);
+    }
+    .cta {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      background: rgba(61, 139, 253, 0.08);
+    }
+    .cta h2 { margin-bottom: 0.5rem; font-size: 1.15rem; }
+    .cta p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
+    .disclaimer {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 1rem 0 2.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+    @media print {
+      body { background: #fff; color: #111; font-size: 11pt; }
+      header, .no-print { display: none !important; }
+      .section { border-color: #ccc; background: #fff; break-inside: avoid; }
+      .item { color: #333; }
+      .box { border-color: #333; background: #fff; }
+      .cta { border-color: #333; background: #f5f5f5; }
+      .cta p { color: #333; }
+      a { color: #111; text-decoration: none; }
+      .disclaimer { color: #555; }
+      .badge { border-color: #999; color: #333; background: #eee; }
+      .hero { padding-top: 0; }
+      h1 { font-size: 18pt; }
+    }
+  </style>
+</head>
+<body>
+  <header class="no-print">
+    <div class="wrap nav">
+      <a class="logo" href="index.html">Fortis <span>Ready</span></a>
+      <div style="display:flex;gap:0.75rem;align-items:center;">
+        <a href="index.html" style="color:var(--muted);font-size:0.9rem;text-decoration:none;">← Offer</a>
+        <a class="btn" href="#" onclick="window.print();return false;">Print</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <div class="badge">Free · Printable · Not an audit</div>
+      <h1>Audit Readiness Checklist</h1>
+      <p class="lead">
+        Use this before you book (or while you wait for) a formal audit. Check what you can verify today.
+        Unchecked items are homework — not a reason to skip a real audit when capital is at risk.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>1. Access control</h2>
+      <div class="item"><span class="box"></span><span>Every privileged function has an explicit modifier / role check (not only “assumed” caller).</span></div>
+      <div class="item"><span class="box"></span><span>Owner / admin / role holders are documented; default admin is not a hot EOA you use daily.</span></div>
+      <div class="item"><span class="box"></span><span>Critical actions (upgrade, pause, mint, sweep) require multi-sig or timelock where appropriate.</span></div>
+      <div class="item"><span class="box"></span><span>No public or incorrectly permissioned <code>initialize</code>, <code>set*</code>, or rescue functions.</span></div>
+      <div class="item"><span class="box"></span><span>Renounce / transfer ownership paths are intentional and tested.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>2. Upgradeability &amp; proxies</h2>
+      <div class="item"><span class="box"></span><span>If upgradeable: proxy pattern named (UUPS / Transparent / Beacon) and justified in docs.</span></div>
+      <div class="item"><span class="box"></span><span>Initializer is protected; implementation cannot be initialized by an attacker.</span></div>
+      <div class="item"><span class="box"></span><span>Storage layout / gaps reviewed for upgrade collisions; no packing surprises across versions.</span></div>
+      <div class="item"><span class="box"></span><span>Upgrade authority and process documented (who, delay, emergency path).</span></div>
+      <div class="item"><span class="box"></span><span>If <em>not</em> upgradeable: immutability is explicit — no accidental proxy or delegatecall surface.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>3. Oracle &amp; external assumptions</h2>
+      <div class="item"><span class="box"></span><span>Price / data sources listed; staleness, decimals, and failure modes documented.</span></div>
+      <div class="item"><span class="box"></span><span>Spot price alone is not used for critical valuation without acknowledging manipulation risk.</span></div>
+      <div class="item"><span class="box"></span><span>External calls (DEX, bridges, registries) have return-value checks and failure handling.</span></div>
+      <div class="item"><span class="box"></span><span>Assumptions about token behavior (fee-on-transfer, rebasing, ERC777 hooks) are written down.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>4. Reentrancy &amp; CEI</h2>
+      <div class="item"><span class="box"></span><span>Checks-Effects-Interactions followed on value-moving paths; state updated before external calls.</span></div>
+      <div class="item"><span class="box"></span><span>ReentrancyGuard (or equivalent) on functions that need it — and you know <em>why</em>.</span></div>
+      <div class="item"><span class="box"></span><span>Cross-function and cross-contract reentrancy considered (not only single-function).</span></div>
+      <div class="item"><span class="box"></span><span>ETH / ERC20 receive hooks and callbacks (e.g. ERC777, flash loans) accounted for.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>5. Authorization &amp; signatures</h2>
+      <div class="item"><span class="box"></span><span>msg.sender vs tx.origin: no reliance on tx.origin for auth.</span></div>
+      <div class="item"><span class="box"></span><span>Permit / EIP-712: domain separator, nonce, deadline, and chainId handled correctly.</span></div>
+      <div class="item"><span class="box"></span><span>Signature replay across contracts / chains considered.</span></div>
+      <div class="item"><span class="box"></span><span>Pull-over-push for token transfers where users could grief or brick accounting.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>6. Tests &amp; Foundry coverage</h2>
+      <div class="item"><span class="box"></span><span>Unit tests for happy path <em>and</em> auth failures, edge amounts, and pause/upgrade paths.</span></div>
+      <div class="item"><span class="box"></span><span>Target: meaningful branch coverage on critical modules (aim ≥80% on core paths; 100% on auth).</span></div>
+      <div class="item"><span class="box"></span><span>Invariant / fuzz tests on accounting invariants (shares, balances, solvency).</span></div>
+      <div class="item"><span class="box"></span><span>Fork tests against Base (or target chain) for integrations you depend on.</span></div>
+      <div class="item"><span class="box"></span><span><code>forge test</code> / CI green on the commit you will hand to auditors.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>7. Documentation for auditors</h2>
+      <div class="item"><span class="box"></span><span>README: system overview, trust model, privileged roles, external dependencies.</span></div>
+      <div class="item"><span class="box"></span><span>Scope list: in-scope contracts, out-of-scope, known issues, deferred items.</span></div>
+      <div class="item"><span class="box"></span><span>NatSpec on public/external interfaces; non-obvious invariants called out in comments or docs.</span></div>
+      <div class="item"><span class="box"></span><span>Deploy / upgrade scripts and expected addresses documented.</span></div>
+      <div class="item"><span class="box"></span><span>Prior reviews, bug bounty notes, or design changes since last review attached.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>8. Common footguns</h2>
+      <div class="item"><span class="box"></span><span>Unchecked external call return values; silent failures on ERC20 <code>transfer</code>/<code>approve</code>.</span></div>
+      <div class="item"><span class="box"></span><span>Integer / rounding that favors the protocol against users (or vice versa) without docs.</span></div>
+      <div class="item"><span class="box"></span><span>Unsafe <code>delegatecall</code>, arbitrary <code>call</code> targets, or user-controlled calldata to sensitive callees.</span></div>
+      <div class="item"><span class="box"></span><span>Front-running / sandwich surfaces on sensitive state changes (if relevant to your product).</span></div>
+      <div class="item"><span class="box"></span><span>Centralization risks labeled honestly (single admin, upgrade key, pause).</span></div>
+      <div class="item"><span class="box"></span><span>Compiler version pinned; known optimizer / version caveats reviewed.</span></div>
+    </div>
+
+    <div class="cta">
+      <h2>Want a second set of eyes before the audit invoice?</h2>
+      <p>
+        Fortis Ready’s Focused Contract Readiness Review ($299 / 300 USDC on Base, 48–72h)
+        is a fixed-scope engineering pass — explicitly <strong>not</strong> a formal audit.
+        Ideal when you have ≤ ~300 nSLOC / one contract and an audit window inside ~8 weeks.
+      </p>
+      <a class="btn no-print" href="index.html#intake">Start intake →</a>
+      <p class="no-print" style="margin-top:0.75rem;font-size:0.85rem;">
+        Or email <code>info@isuru.dev</code>
+      </p>
+    </div>
+
+    <p class="disclaimer">
+      <strong>Not a formal security audit.</strong> This checklist is educational. Completing it does not mean your
+      contracts are safe. Fortis Ready provides readiness feedback only — no guarantees, certifications, or custody.
+      Smart contract deployment can result in total loss of funds. See the full disclaimer in brand materials.
+      © Fortis Ready
+    </p>
+  </main>
+</body>
+</html>
